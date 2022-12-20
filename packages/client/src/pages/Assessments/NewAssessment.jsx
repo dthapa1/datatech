@@ -11,6 +11,6 @@ export const NewAssessment = () => {
   };
 
   return <Form>
-    <Button variant="primary" type="submit">Submit</Button>
+    <Button variant="success" type="submit">Submit</Button>
   </Form>;
 };
