@@ -1,6 +1,6 @@
 {
   "extends": [ "eslint:recommended" ],
-  "plugins": [ "import", "sort-destructure-keys", "import-quotes" ],
+  "plugins": [ "import", "import-quotes" ],
   "parserOptions": {
     "sourceType": "module"
   },
