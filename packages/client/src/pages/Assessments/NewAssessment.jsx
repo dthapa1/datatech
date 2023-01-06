@@ -15,11 +15,13 @@ export const NewAssessment = () =>
     watch,
   } = useForm();
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     const { q1, q2, q3, q4, q5 } = data;
     const sum = parseInt(q1) + parseInt(q2) + parseInt(q3) + parseInt(q4) + parseInt(q5);
     console.log(sum);
     setUserPoints(sum);
+    data.score = sum;
+    await AssessmentService.submit(data);
   };
 
   const value1 = watch(`q1`);
@@ -44,11 +46,10 @@ export const NewAssessment = () =>
 
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)} />
       <h3>Cat Behavioral Instrument</h3>
       <h1> User Score: {userPoints}</h1>
       <h3> Cat Details </h3>
-      <Form onSubmit={handleSubmit((data) => console.log(data))}>
+      <Form onSubmit={handleSubmit(onSubmit)}>
         <Form.Group className="mb-3" controlId="catName">
           <Form.Label>Cat Name</Form.Label>
           <Form.Control type="text" placeholder="Enter Cat Name" {...register(`catName`, { required: true })} />
