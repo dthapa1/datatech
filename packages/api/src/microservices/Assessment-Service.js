@@ -4,7 +4,17 @@ exports.submit = async (assessment) => {
   // use the sequelize model Assessments from packages/api/src/database/models to save
   // the assessment data in the PostgreSQL database
   console.log(assessment);
-  const result = { ...assessment };
+
+  const riskLevel = `low`;
+
+  return await Assessment.create({
+    catDateOfBirth: assessment.birthDate,
+    catName: assessment.catName,
+    instrumentType: assessment.instrumentType,
+    riskLevel: assessment.riskLevel,
+    score: assessment.score,
+  });
+
 };
 
 exports.getList = () => {
