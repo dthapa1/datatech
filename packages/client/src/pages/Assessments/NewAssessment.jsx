@@ -5,6 +5,20 @@ import { AssessmentService } from '../../services/AssessmentService';
 
 const categoryPoints = { value0: 0, value1: 1 };
 
+function riskLevel(score) {
+  switch (true) {
+    case score >= 2 && score <= 3:
+      return `Medium`;
+    case score >= 4 && score <= 5:
+      return `High`;
+    case score >= 0 && score <= 1:
+      return `Low`;
+    default:
+      return ``;
+  }
+
+}
+
 export const NewAssessment = () =>
 {
   const [ userPoints, setUserPoints ] = useState(0);
@@ -21,6 +35,8 @@ export const NewAssessment = () =>
     console.log(sum);
     setUserPoints(sum);
     data.score = sum;
+    data.instrumentType = 1;
+    data.riskLevel = riskLevel(sum);
     await AssessmentService.submit(data);
   };
 
