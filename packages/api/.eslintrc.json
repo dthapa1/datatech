@@ -114,7 +114,7 @@
     "semi": [ 2, "always" ],
     "semi-spacing": 2,
     "semi-style": [ 2, "last" ],
-    "sort-destructure-keys/sort-destructure-keys": 2,
+    "sort-destructure-keys/sort-destructure-keys": false,
     "sort-imports": [ 2, {
       "ignoreCase": true,
       "ignoreDeclarationSort": true
