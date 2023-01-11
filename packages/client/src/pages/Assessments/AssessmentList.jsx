@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { useTable } from 'react-table';
+import { useSortBy, useTable } from 'react-table';
 import { AssessmentService } from '../../services/AssessmentService';
 
 export const AssessmentList = () => {
@@ -39,7 +39,7 @@ export const AssessmentList = () => {
     headerGroups,
     prepareRow,
     rows,
-  } = useTable({ columns, data: assessments });
+  } = useTable({ columns, data: assessments }, useSortBy);
 
   // fetch all assessments using the AssessmentService.getList function from OCAT/client/services/AssessmentService.js
   useEffect(() => {
@@ -47,7 +47,7 @@ export const AssessmentList = () => {
       setAssessments(await AssessmentService.getList());
     };
     fetchAssessments();
-  }, [ assessments ]);
+  }, [ ]);
 
   return (
     <div>
@@ -57,7 +57,7 @@ export const AssessmentList = () => {
             <tr {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map(column =>
                 <th
-                  {...column.getHeaderProps()}
+                  {...column.getHeaderProps(column.getSortByToggleProps())}
                   style={{
                     border: `solid 3px black`,
                     background: `aliceblue`,
@@ -66,6 +66,13 @@ export const AssessmentList = () => {
                   }}
                 >
                   {column.render(`Header`)}
+                  <span>
+                    {column.isSorted ?
+                      column.isSortedDesc ?
+                        ` 🔽` :
+                        ` 🔼` :
+                      ``}
+                  </span>
                 </th>)}
             </tr>)}
         </thead>
