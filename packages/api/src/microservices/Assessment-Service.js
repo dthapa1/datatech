@@ -20,6 +20,7 @@ exports.submit = async (assessment) => {
 exports.getList = () => {
   // use the sequelize model Assessments from packages/api/src/database/models to fetch
   // the assessment data from the PostgreSQL database
+  // checking if the new branch works
   const assessments = [];
 
   return assessments;
