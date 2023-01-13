@@ -16,7 +16,7 @@ export class AssessmentService {
 
   static delete(id) {
     try {
-      return Axios.post(`/assessment/delete`, { id });
+      return Axios.delete(`/assessment/${id}`);
     }
     catch (err) {
       throw new Error(`${err.response.statusText} - ${err.response.data.message}`);
