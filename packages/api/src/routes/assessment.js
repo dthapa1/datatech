@@ -26,9 +26,21 @@ assessmentRouter.post(
     }
   },
 );
-
+assessmentRouter.post(
+  `/delete`,
+  async (req, res, next) => {
+    try {
+      const { id } = req.body;
+      await AssessmentService.delete(id);
+    }
+    catch (err) {
+      next(err)
+    }
+  } 
+  );
 assessmentRouter.get(
   `/list`,
+
 
   async (req, res, next) => {
     try {
