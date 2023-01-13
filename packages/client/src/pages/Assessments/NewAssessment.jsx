@@ -6,16 +6,27 @@ import { AssessmentService } from '../../services/AssessmentService';
 const categoryPoints = { value0: 0, value1: 1 };
 
 function riskLevel(score) {
-  switch (true) {
-    case score >= 2 && score <= 3:
-      return `Medium`;
-    case score >= 4 && score <= 5:
-      return `High`;
-    case score >= 0 && score <= 1:
-      return `Low`;
-    default:
-      return ``;
+  // switch (true) {
+  //   case score >= 2 && score <= 3:
+  //     return `Medium`;
+  //   case score >= 4 && score <= 5:
+  //     return `High`;
+  //   case score >= 0 && score <= 1:
+  //     return `Low`;
+  //   default:
+  //     return ``;
+  // }
+
+  if (score >= 2 && score <= 3) {
+    return `Medium`;
   }
+  else if (score >= 4 && score <= 5) {
+    return `High`;
+  }
+  else if (score >= 0 && score <= 1) {
+    return `Low`;
+  }
+  return ``;
 
 }
 
@@ -32,7 +43,6 @@ export const NewAssessment = () =>
   const onSubmit = async (data) => {
     const { q1, q2, q3, q4, q5 } = data;
     const sum = parseInt(q1) + parseInt(q2) + parseInt(q3) + parseInt(q4) + parseInt(q5);
-    console.log(sum);
     setUserPoints(sum);
     data.score = sum;
     data.instrumentType = 1;
