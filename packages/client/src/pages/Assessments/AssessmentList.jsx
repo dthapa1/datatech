@@ -13,8 +13,17 @@ export const AssessmentList = () => {
   }, [ ]);
 
   const handleDelete = async (row) => {
-    await AssessmentService.delete(row.original.id);
+    const idToDelete = row.original.id;
+    const newAssessments = assessments.filter((assessment) => {
+      if (assessment.id !== idToDelete) {
+        return true;
+      }
+      return false;
+    });
+    setAssessments(newAssessments);
+    await AssessmentService.delete(idToDelete);
   };
+
   const columns = useMemo(() => [
 
     {
@@ -47,7 +56,7 @@ export const AssessmentList = () => {
       Header: `Delete`,
     },
 
-  ], []);
+  ], [ assessments ]);
 
   const {
     getTableBodyProps,
