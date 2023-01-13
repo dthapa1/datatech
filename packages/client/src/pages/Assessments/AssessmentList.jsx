@@ -4,6 +4,17 @@ import { AssessmentService } from '../../services/AssessmentService';
 
 export const AssessmentList = () => {
   const [ assessments, setAssessments ] = useState([]);
+  // fetch all assessments using the AssessmentService.getList function from OCAT/client/services/AssessmentService.js
+  useEffect(() => {
+    const fetchAssessments = async () => {
+      setAssessments(await AssessmentService.getList());
+    };
+    fetchAssessments();
+  }, [ ]);
+
+  const handleDelete = async (row) => {
+    await AssessmentService.delete(row.original.id);
+  };
   const columns = useMemo(() => [
 
     {
@@ -30,6 +41,11 @@ export const AssessmentList = () => {
       Header: `Cat Date of Birth`,
       accessor: `catDateOfBirth`,
     },
+    {
+      Cell: ({ row }) =>
+        <button onClick={() => handleDelete(row)}>Delete</button>,
+      Header: `Delete`,
+    },
 
   ], []);
 
@@ -40,14 +56,6 @@ export const AssessmentList = () => {
     prepareRow,
     rows,
   } = useTable({ columns, data: assessments }, useSortBy);
-
-  // fetch all assessments using the AssessmentService.getList function from OCAT/client/services/AssessmentService.js
-  useEffect(() => {
-    const fetchAssessments = async () => {
-      setAssessments(await AssessmentService.getList());
-    };
-    fetchAssessments();
-  }, [ ]);
 
   return (
     <div>
